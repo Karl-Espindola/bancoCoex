@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+.contenedor{
+    padding:10px;
+    background-color:aquamarine;
+    height: 100vh;
+}
+.sidebar{
+    position: fixed;
+    height: calc( 100vh - 20px);
+    width: 20%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-radius: 20px;
+}
+.logo{
+    width: 110px;
+}
+.lista{
+    list-style: none;
+}
+.li-link{
+    text-decoration: none;
+    color: black;
+}
+.informacion{
+    margin-left:23%;
+}
+.titulo{
+    text-align: center;
+    width: 100%;
+    background-color: white;
+}
+.info-banc{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+.info{
+    padding: 15px;
+    background-color: white;
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* ################################# */
+
+.contenedor-buscar-crear{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.table{
+    background-color: white;
+}
+
+/* #################################### */
+
+.contenedor-formulario{
+    margin: auto;
+    margin-top: 30px;
+    width: 650px;
+}
+.form-edit{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+}
+.form-grupo{
+    display: flex;
+    flex-direction: column;
+    margin-bottom:10px;
+}
+
+/* #################################### */
+
+.form-reg{
+    position: relative;
+    justify-content: space-around;
+    padding-bottom: 40px;
+}
+.btn-crear{
+    position: absolute;
+    bottom:20px;
+    left: 50%;
+}
