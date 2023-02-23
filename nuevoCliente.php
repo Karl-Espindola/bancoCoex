@@ -13,7 +13,7 @@
             <img src="img/logo_usuario.png" alt="" class="logo">
             <ul class="lista">
                 <li class="">
-                    <a href="" class="li-link">
+                    <a href="index.php" class="li-link">
 
                         <span>Inicio</span>
                     </a>
@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="" class="li-link">
+                    <a href="nuevoCredito.php" class="li-link">
 
                         <span>créditos</span>
                     </a>

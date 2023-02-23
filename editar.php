@@ -1,3 +1,21 @@
+<?php
+require("controladores/conectar_db.php");
+if(isset($_GET["id"])){
+    $id=$_GET["id"];
+    $consulta="SELECT tbl_usuarios.*, tbl_ciudades.ciu_nom, tbl_estados.est_des  
+    FROM tbl_usuarios
+    INNER JOIN tbl_ciudades ON tbl_usuarios.usu_ciu_id=tbl_ciudades.ciu_id
+    AND tbl_usuarios.usu_id=$id
+    INNER JOIN tbl_estados ON tbl_usuarios.usu_est_id=tbl_estados.est_id
+    ";
+    $resultado=mysqli_query($conexion, $consulta);
+    $fila=mysqli_fetch_array($resultado, MYSQLI_ASSOC);
+}
+else{
+    // header("location:clientes.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,45 +33,60 @@
             </div>
             <div class="contenedor-formulario">
                 <p>Datos personales</p>
-                <form action="" method="post" class="form-edit">
+                <form action="controladores/actualizar_cliente.php" method="post" class="form-edit">
                     <div class="form-col">
                         <div class="form-grupo">
                             <label for="">Nombres</label>
-                            <input type="text">
+                            <?php
+                            echo "<input type='text' name='nom' value='".$fila["usu_nom"]."'>";
+                            ?>
                         </div>
                         <div class="form-grupo">
                             <label for="">NIT/CC</label>
-                            <input type="text">
+                            <?php
+                            echo "<input type='text' name='nit' value='".$fila["usu_nit"]."'>";
+                            ?>
                         </div>
                         <div class="form-grupo">
-                            <label for="">NIT/CC</label>
-                            <select name="" id="">
-                                <option value="" >Bucararamanga</option>
-                                <option value="" selected>Cali</option>
+                            <label for="">Ciudad</label>
+                            <select name="ciudad" id="">
+                                <?php
+                                echo "<option value='".$fila["usu_ciu_id"]."'>".$fila["ciu_nom"]."</option>";
+                                ?>
                             </select>
                         </div>
                         <div class="form-grupo">
                             <label for="">Estado de crédito</label>
-                            <select name="" id="">
-                                <option value="" >Inactivo</option>
-                                <option value="" selected>Activo</option>
+                            <select name="estado" id="">
+                                <?php
+                                echo "<option value='".$fila["usu_est_id"]."'>".$fila["est_des"]."</option>";
+                                ?>
                             </select>
                         </div>
+                        <?php
+                            echo "<input type='text' style='display:none' name='id' value='".$id."'>";
+                        ?>
                         <button>Guardar cambios</button>
 
                     </div>
                     <div class="form-col">
                         <div class="form-grupo">
                             <label for="">Apellidos</label>
-                            <input type="text">
+                            <?php
+                            echo "<input type='text' name='apellido' value='".$fila["usu_ape"]."'>";
+                            ?>
                         </div>
                         <div class="form-grupo">
                             <label for="">Direccion</label>
-                            <input type="text">
+                            <?php
+                            echo "<input type='text' name='direccion' value='".$fila["usu_dir"]."'>";
+                            ?>
                         </div>
                         <div class="form-grupo">
                             <label for="">Telefono</label>
-                            <input type="number">
+                            <?php
+                            echo "<input type='text' name='telefono' value='".$fila["usu_tel"]."'>";
+                            ?>
                         </div>
                     </div>
                     <div class="form-col">
@@ -63,7 +96,9 @@
                         </div>
                         <div class="form-grupo">
                             <label for="">Cupo disponible</label>
-                            <input type="number ">
+                            <?php
+                            echo "<input type='text' name='cupDisp' value='".$fila["usu_cup"]."'>";
+                            ?>
                         </div>
                         <div class="form-grupo">
                             <label for="">Dias de gracia</label>

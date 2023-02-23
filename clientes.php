@@ -1,3 +1,13 @@
+<?php
+if(isset($_GET["cli"])){
+    $cli=$_GET["cli"];
+    $id=$_GET["id"];
+}
+else{
+    $cli=false;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,8 +49,8 @@
                 <h2>Clientes</h2>
             </div>
             <div class="contenedor-buscar-crear">
-                <form action="" method="get">
-                    <input type="text" placeholder="Nobre. NIT o CC">
+                <form action="controladores/buscar_cliente.php" method="post">
+                    <input type="text" name="cliente" placeholder="Nobre. NIT o CC">
                     <button>buscar</button>
                 </form>
                 <button><a href="nuevoCliente.php">Crear cliente</a></button>
@@ -65,27 +75,77 @@
                     <tbody>
                         <?php
                         require("controladores/conectar_db.php");
-	
-                        $consulta="SELECT tbl_usuarios.*, tbl_ciudades.ciu_nom, tbl_estados.est_des  
-                        FROM tbl_usuarios
-                        INNER JOIN tbl_ciudades ON tbl_usuarios.usu_ciu_id=tbl_ciudades.ciu_id
-                        INNER JOIN tbl_estados ON tbl_usuarios.usu_est_id=tbl_estados.est_id
-                        ";
-                        $resultado=mysqli_query($conexion, $consulta);
                         
-                        while($fila=mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-			
-                            echo "<tr>";
-                            echo "<td>".$fila['usu_nom']."</td>";
-                            echo "<td>".$fila['usu_ape']."</td>";
-                            echo "<td>".$fila['usu_nit']."</td>";
-                            echo "<td>".$fila['usu_dir']."</td>";
-                            echo "<td>".$fila['ciu_nom']."</td>";
-                            echo "<td>".$fila['usu_tel']."</td>";
-                            echo "<td>".$fila['usu_cup']."</td>";
-                            echo "<td>".$fila['est_des']."</td>";
-                            echo "<td><button><a href='editar.php'>E</a></button><button><a href=''>D</a></button></td>";
-                            echo "</tr>";   
+                        if(!$cli || ($cli==0)){
+        
+                            $consulta="SELECT tbl_usuarios.*, tbl_ciudades.ciu_nom, tbl_estados.est_des  
+                            FROM tbl_usuarios
+                            INNER JOIN tbl_ciudades ON tbl_usuarios.usu_ciu_id=tbl_ciudades.ciu_id
+                            INNER JOIN tbl_estados ON tbl_usuarios.usu_est_id=tbl_estados.est_id
+                            ";
+                            $resultado=mysqli_query($conexion, $consulta);
+                            
+                            while($fila=mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+                
+                                echo "<tr>";
+                                echo "<td>".$fila['usu_nom']."</td>";
+                                echo "<td>".$fila['usu_ape']."</td>";
+                                echo "<td>".$fila['usu_nit']."</td>";
+                                echo "<td>".$fila['usu_dir']."</td>";
+                                echo "<td>".$fila['ciu_nom']."</td>";
+                                echo "<td>".$fila['usu_tel']."</td>";
+                                echo "<td>".$fila['usu_cup']."</td>";
+                                echo "<td>".$fila['est_des']."</td>";
+                                echo "<td><button><a href='editar.php?id=".$fila['usu_id']."'>E</a></button>";
+                                echo "<button><a href='controladores/eliminar_cliente.php?id=".$fila['usu_id']."'>D</a></button></td>";
+                                echo "</tr>";   
+                            }
+                        }
+                        if($cli=="nom"){
+                            $consulta="SELECT tbl_usuarios.*, tbl_ciudades.ciu_nom, tbl_estados.est_des  
+                            FROM tbl_usuarios
+                            INNER JOIN tbl_ciudades ON tbl_usuarios.usu_ciu_id=tbl_ciudades.ciu_id
+                            AND tbl_usuarios.usu_nom='$id'
+                            INNER JOIN tbl_estados ON tbl_usuarios.usu_est_id=tbl_estados.est_id";
+                            
+                            $resultado=mysqli_query($conexion, $consulta);
+                            while($fila=mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+                
+                                echo "<tr>";
+                                echo "<td>".$fila['usu_nom']."</td>";
+                                echo "<td>".$fila['usu_ape']."</td>";
+                                echo "<td>".$fila['usu_nit']."</td>";
+                                echo "<td>".$fila['usu_dir']."</td>";
+                                echo "<td>".$fila['ciu_nom']."</td>";
+                                echo "<td>".$fila['usu_tel']."</td>";
+                                echo "<td>".$fila['usu_cup']."</td>";
+                                echo "<td>".$fila['est_des']."</td>";
+                                echo "<td><button><a href='editar.php'>E</a></button><button><a href=''>D</a></button></td>";
+                                echo "</tr>";   
+                            }
+                        }
+                        if($cli=="nit"){
+                            $consulta="SELECT tbl_usuarios.*, tbl_ciudades.ciu_nom, tbl_estados.est_des  
+                            FROM tbl_usuarios
+                            INNER JOIN tbl_ciudades ON tbl_usuarios.usu_ciu_id=tbl_ciudades.ciu_id 
+                            AND tbl_usuarios.usu_nit=$id
+                            INNER JOIN tbl_estados ON tbl_usuarios.usu_est_id=tbl_estados.est_id";
+
+                            $resultado=mysqli_query($conexion, $consulta);
+                            while($fila=mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+                
+                                echo "<tr>";
+                                echo "<td>".$fila['usu_nom']."</td>";
+                                echo "<td>".$fila['usu_ape']."</td>";
+                                echo "<td>".$fila['usu_nit']."</td>";
+                                echo "<td>".$fila['usu_dir']."</td>";
+                                echo "<td>".$fila['ciu_nom']."</td>";
+                                echo "<td>".$fila['usu_tel']."</td>";
+                                echo "<td>".$fila['usu_cup']."</td>";
+                                echo "<td>".$fila['est_des']."</td>";
+                                echo "<td><button><a href='editar.php'>E</a></button><button><a href=''>D</a></button></td>";
+                                echo "</tr>";   
+                            }
                         }
                         ?>
                     </tbody>
