@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-02-2023 a las 00:14:29
+-- Tiempo de generación: 24-02-2023 a las 00:09:14
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -86,7 +86,8 @@ CREATE TABLE `tbl_usuarios` (
 
 INSERT INTO `tbl_usuarios` (`usu_id`, `usu_nom`, `usu_ape`, `usu_nit`, `usu_dir`, `usu_ciu_id`, `usu_tel`, `usu_cup`, `usu_est_id`) VALUES
 (1, 'Carlos', 'Gomez', 1199878181, 'calle 33 # 44-32', 1, '300 342 5565', 500000, 1),
-(2, 'Lukas', 'perez', 0, 'fs', 2, '344', 42342, 2);
+(3, 'Lukas', 'perez', 25235, 'cc', 2, '300234232', 3000000, 1),
+(4, 'Juan', 'Perex', 25235323, 'rr', 3, '310345345', 400000000, 2);
 
 --
 -- Índices para tablas volcadas
@@ -132,7 +133,7 @@ ALTER TABLE `tbl_estados`
 -- AUTO_INCREMENT de la tabla `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
-  MODIFY `usu_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `usu_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
