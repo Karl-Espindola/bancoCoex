@@ -66,7 +66,7 @@ else{
                         <?php
                             echo "<input type='text' style='display:none' name='id' value='".$id."'>";
                         ?>
-                        <button>Guardar cambios</button>
+                        <button class="btnA">Guardar cambios</button>
 
                     </div>
                     <div class="form-col">
